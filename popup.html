@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Fill Window</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="panel">
+    <header class="head">
+      <svg class="mark" viewBox="0 0 36 36" width="20" height="20" aria-hidden="true">
+        <rect x="6" y="8" width="24" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="6" y1="14" x2="30" y2="14" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h1>Fill Window</h1>
+    </header>
+
+    <p class="lede">Stretches the video to your browser window's own edges, not your whole monitor. Built for split-screen and snapped windows.</p>
+
+    <button type="button" id="toggleRow" class="switch-row" aria-pressed="false">
+      <span class="switch-label">Fill this tab's window</span>
+      <span class="switch" id="switchControl"><span class="switch-knob"></span></span>
+    </button>
+
+    <p id="status" class="status" role="status"></p>
+
+    <div class="divider"></div>
+
+    <label class="check-row">
+      <input type="checkbox" id="autoEnable" />
+      <span>Turn on automatically for every video</span>
+    </label>
+
+    <div class="shortcut-row">
+      <span class="shortcut-label">Shortcut</span>
+      <div class="shortcut-right">
+        <kbd id="shortcutKeys">&hellip;</kbd>
+        <button type="button" id="changeShortcut" class="link-btn">Change</button>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
