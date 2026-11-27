@@ -35,9 +35,13 @@ html.ytwf-active body {
   justify-content: center !important;
 }
 
-/* ========================================================
-   EDGE-TO-EDGE SPLIT-SCREEN ZOOM MODE (ZERO BLACK BARS)
-   ======================================================== */
+/* Hide YouTube's native clunky bottom bar while Fill Window is active so the Floating Glass Island shines */
+html.ytwf-active #movie_player .ytp-chrome-bottom {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Edge-to-Edge Zoom (Zero black bars in split screen) */
 html.ytwf-crop-fill #movie_player.ytwf-active video.video-stream,
 #movie_player.ytwf-active.ytwf-crop-fill video.video-stream {
   width: 100% !important;
@@ -102,131 +106,134 @@ html.ytwf-active ytd-miniplayer {
    Frosted red glass capsule floating over the video
    ======================================================== */
 .ytwf-glass-hud {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px) scale(0.96);
-  z-index: 2147483647;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  background: rgba(22, 6, 11, 0.78);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 80, 105, 0.35);
-  border-radius: 999px;
+  position: fixed !important;
+  bottom: 30px !important;
+  left: 50% !important;
+  transform: translateX(-50%) translateY(20px) scale(0.95) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  background: rgba(22, 6, 11, 0.82) !important;
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+  border: 1px solid rgba(255, 80, 105, 0.45) !important;
+  border-radius: 999px !important;
   box-shadow:
-    0 12px 35px rgba(0, 0, 0, 0.75),
-    0 0 20px rgba(255, 0, 51, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.22);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #ffffff;
-  user-select: none;
+    0 14px 40px rgba(0, 0, 0, 0.8),
+    0 0 24px rgba(255, 0, 51, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 0.22s !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  color: #ffffff !important;
+  user-select: none !important;
 }
 
 .ytwf-glass-hud.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateX(-50%) translateY(0) scale(1);
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  visibility: visible !important;
+  transform: translateX(-50%) translateY(0) scale(1) !important;
 }
 
 /* HUD Buttons */
 .ytwf-hud-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #ffffff;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  transition: all 0.15s ease;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-radius: 50% !important;
+  width: 34px !important;
+  height: 34px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  transition: all 0.15s ease !important;
 }
 
 .ytwf-hud-btn:hover {
-  background: rgba(255, 0, 51, 0.35);
-  border-color: rgba(255, 90, 115, 0.55);
-  box-shadow: 0 0 12px rgba(255, 0, 51, 0.45);
-  transform: scale(1.05);
+  background: rgba(255, 0, 51, 0.4) !important;
+  border-color: rgba(255, 90, 115, 0.65) !important;
+  box-shadow: 0 0 14px rgba(255, 0, 51, 0.55) !important;
+  transform: scale(1.08) !important;
 }
 
 .ytwf-hud-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.95) !important;
 }
 
 .ytwf-hud-btn svg {
-  width: 16px;
-  height: 16px;
-  fill: currentColor;
+  width: 17px !important;
+  height: 17px !important;
+  fill: currentColor !important;
 }
 
 /* Scrub & Time Cluster */
 .ytwf-hud-scrub-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 4px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 0 6px !important;
 }
 
 .ytwf-hud-time {
-  font-size: 11px;
-  font-weight: 600;
-  color: #ffb8c5;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  color: #ffccd4 !important;
+  font-variant-numeric: tabular-nums !important;
+  white-space: nowrap !important;
 }
 
 .ytwf-hud-progress-bg {
-  position: relative;
-  width: 90px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  cursor: pointer;
-  overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  position: relative !important;
+  width: 95px !important;
+  height: 6px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5) !important;
 }
 
 .ytwf-hud-progress-bar {
-  height: 100%;
-  width: 0%;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #ff3355, #ff0033);
-  box-shadow: 0 0 8px rgba(255, 0, 51, 0.7);
-  transition: width 0.1s linear;
+  height: 100% !important;
+  width: 0% !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, #ff3355, #ff0033) !important;
+  box-shadow: 0 0 8px rgba(255, 0, 51, 0.8) !important;
+  transition: width 0.1s linear !important;
 }
 
 /* Speed Pill Button */
 .ytwf-hud-speed-btn {
   border-radius: 999px !important;
   width: auto !important;
-  padding: 0 9px !important;
+  padding: 0 10px !important;
   font-size: 11px !important;
   font-weight: 700 !important;
-  color: #ffcad3 !important;
-  height: 28px !important;
+  color: #ffffff !important;
+  height: 30px !important;
 }
 
 /* Active Zoom/Fill state in HUD */
 .ytwf-hud-zoom.active {
-  background: linear-gradient(135deg, #ff0033, #b91c1c);
-  border-color: rgba(255, 120, 140, 0.7);
-  box-shadow: 0 0 12px rgba(255, 0, 51, 0.6);
+  background: linear-gradient(135deg, #ff0033, #b91c1c) !important;
+  border-color: rgba(255, 120, 140, 0.7) !important;
+  box-shadow: 0 0 12px rgba(255, 0, 51, 0.6) !important;
 }
 
 /* PiP Active State */
 .ytwf-hud-pip.active {
-  background: rgba(255, 0, 51, 0.45);
-  border-color: #ff3355;
-  box-shadow: 0 0 12px rgba(255, 0, 51, 0.5);
+  background: rgba(255, 0, 51, 0.45) !important;
+  border-color: #ff3355 !important;
+  box-shadow: 0 0 12px rgba(255, 0, 51, 0.5) !important;
 }

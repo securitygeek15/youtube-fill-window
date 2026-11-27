@@ -64,7 +64,7 @@
         await video.requestPictureInPicture();
       }
     } catch (err) {
-      console.warn('PiP error:', err);
+      console.warn('[YouTube Fill Window] PiP error:', err);
     }
     updateHudState();
   }
@@ -210,14 +210,25 @@
     return hudEl;
   }
 
-  function showHud() {
-    if (!isActive || !hudEl) return;
+  function showHud(duration = 2800) {
+    if (!isActive) return;
+    if (!hudEl) createHud();
+
+    // Ensure HUD is in DOM
+    const player = getPlayer();
+    if (player && !player.contains(hudEl)) {
+      player.appendChild(hudEl);
+    } else if (!document.body.contains(hudEl)) {
+      document.body.appendChild(hudEl);
+    }
+
     hudEl.classList.add('visible');
     clearTimeout(hudTimer);
+
     if (!hudHovered) {
       hudTimer = setTimeout(() => {
         if (!hudHovered && hudEl) hudEl.classList.remove('visible');
-      }, 2600);
+      }, duration);
     }
   }
 
@@ -256,16 +267,10 @@
   }
 
   function setupPlayerHud(player) {
-    if (!hudEl) {
-      createHud();
-    }
-    if (!player.contains(hudEl)) {
+    createHud();
+    if (player && !player.contains(hudEl)) {
       player.appendChild(hudEl);
     }
-
-    // Show HUD on player mousemove
-    player.addEventListener('mousemove', showHud);
-    player.addEventListener('click', showHud);
 
     const video = getVideo();
     if (video) {
@@ -276,6 +281,23 @@
       video.addEventListener('leavepictureinpicture', updateHudState);
     }
   }
+
+  // Global mousemove capture so no YouTube stopPropagation can block revealing the HUD:
+  window.addEventListener(
+    'mousemove',
+    () => {
+      if (isActive) showHud();
+    },
+    true
+  );
+
+  window.addEventListener(
+    'click',
+    () => {
+      if (isActive) showHud();
+    },
+    true
+  );
 
   // ========================================================
   // IN-PLAYER BUTTON (NATIVE YOUTUBE BAR)
@@ -336,6 +358,7 @@
     }
 
     updateControlButton();
+    setupPlayerHud(player);
   }
 
   // ========================================================
@@ -375,7 +398,7 @@
         player.classList.add(ACTIVE_CLASS);
         player.classList.toggle(CROP_CLASS, isCropFill);
         setupPlayerHud(player);
-        showHud();
+        showHud(4000);
       } else {
         player.classList.remove(ACTIVE_CLASS);
         player.classList.remove(CROP_CLASS);
@@ -450,6 +473,14 @@
         toggleCrop();
         return;
       }
+
+      // 'H' key forces the Floating HUD to show
+      if (isActive && (e.key === 'h' || e.key === 'H') && !e.altKey && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        e.stopPropagation();
+        showHud(5000);
+        return;
+      }
     },
     true
   );
@@ -464,6 +495,10 @@
       case 'TOGGLE_PIP':
         togglePiP();
         sendResponse({ active: isActive, isPiP: !!document.pictureInPictureElement });
+        break;
+      case 'SHOW_HUD':
+        if (isActive) showHud(5000);
+        sendResponse({ active: isActive });
         break;
       case 'TOGGLE_CROP':
         toggleCrop();
