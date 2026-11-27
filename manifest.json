@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "YouTube Fill Window",
-  "version": "1.0.0",
-  "description": "Fills YouTube videos to your browser window's own edges instead of the whole screen — built for split-screen and snapped windows in Chrome, Brave, and other Chromium browsers.",
+  "version": "1.1.0",
+  "description": "Fills YouTube videos to your browser window's own edges with a Red Glassmorphic UI, Floating Glass Island HUD & Picture-in-Picture.",
   "permissions": ["storage"],
   "host_permissions": ["*://*.youtube.com/*"],
   "background": {
