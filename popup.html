@@ -26,17 +26,30 @@
       </div>
     </header>
 
-    <p class="lede">Stretches video to your browser window's own edges. Built for split-screen & snapped windows.</p>
+    <p class="lede">Fills video to your browser window with a Floating Glass HUD & Picture-in-Picture.</p>
 
     <!-- Master Switch Card -->
     <button type="button" id="toggleRow" class="switch-row" aria-pressed="false">
       <div class="switch-content">
         <span class="switch-label">Fill this tab's window</span>
-        <span class="switch-hint">Toggle full tab viewport</span>
+        <span class="switch-hint">Floating HUD + Edge-to-edge</span>
       </div>
       <span class="switch" id="switchControl">
         <span class="switch-knob"></span>
       </span>
+    </button>
+
+    <!-- Picture-in-Picture Quick Action Button -->
+    <button type="button" id="pipBtn" class="glass-action-btn" title="Toggle Picture-in-Picture (P)">
+      <div class="action-btn-left">
+        <div class="action-btn-icon">
+          <svg viewBox="0 0 24 24" width="16" height="16">
+            <path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="action-btn-label">Picture-in-Picture (PiP)</span>
+      </div>
+      <kbd>P</kbd>
     </button>
 
     <div class="status-wrap">
@@ -60,7 +73,7 @@
 
     <!-- Shortcut Row -->
     <div class="shortcut-row">
-      <span class="shortcut-label">Shortcut</span>
+      <span class="shortcut-label">Fill Hotkey</span>
       <div class="shortcut-right">
         <kbd id="shortcutKeys">&hellip;</kbd>
         <button type="button" id="changeShortcut" class="link-btn">Change</button>
